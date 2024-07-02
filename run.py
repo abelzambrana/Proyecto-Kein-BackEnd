@@ -12,21 +12,21 @@ app.route('/api/cereal',methods=['GET'])(api_cereal)
 if  __name__=='__main__':
     app.run(debug=True)
 
-"""
-@app.route('/')
 
-def index():
-    return '<h1>Hola mundo con flask </h1>'
+#@app.route('/')
 
-@app.route('/api')
+#def index():
+#    return '<h1>Hola mundo con flask </h1>'
 
-def api():
-    return '<h1>Hola API con flask </h1>'
+#@app.route('/api')
 
-@app.route('/api/cereal')
+#def api():
+#    return '<h1>Hola API con flask </h1>'
 
-def api_cereal():
-    return '<h1>Hola API/Cereal con flask </h1>' 
+#@app.route('/api/cereal')
 
-"""
+#def api_cereal():
+#    return '<h1>Hola API/Cereal con flask </h1>' 
+
+
 

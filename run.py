@@ -8,6 +8,10 @@ app= Flask(__name__)
 app.route('/',methods=['GET'])(index)
 app.route('/api/cereal',methods=['GET'])(api_cereal)
 
+
+if  __name__=='__main__':
+    app.run(debug=True)
+
 """
 @app.route('/')
 
@@ -26,5 +30,3 @@ def api_cereal():
 
 """
 
-if  __name__=='__main__':
-    app.run(debug=True)

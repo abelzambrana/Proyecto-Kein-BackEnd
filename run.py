@@ -1,12 +1,12 @@
 from flask import Flask
-from app.views import index,api_cereal
+from app.views import index,get_all_cereal
 
 #inicialización del proyecto flask
 
 app= Flask(__name__)
 
 app.route('/',methods=['GET'])(index)
-app.route('/api/cereal',methods=['GET'])(api_cereal)
+app.route('/api/cereal',methods=['GET'])(get_all_cereal)
 
 
 if  __name__=='__main__':

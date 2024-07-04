@@ -1,5 +1,5 @@
 from flask import Flask
-from app.views import index,get_all_cereal
+from app.views import *
 
 #inicialización del proyecto flask
 

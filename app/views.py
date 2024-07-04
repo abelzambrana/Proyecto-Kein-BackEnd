@@ -23,3 +23,16 @@ def get_all_cereal():
              ]
 
     return  jsonify(cereal)
+
+
+def get_cereal():
+    pass
+
+def create_cereal():
+    pass
+
+def update_cereal():
+    pass
+
+def delete_cereal():
+    pass

@@ -1,6 +1,6 @@
 from app.database import get_db
 
-class cereal:
+class Cereal:
 
     def __init__(self, id_cereal=None, nombre=None, fabricante=None, due_date=None, banner=None):
 

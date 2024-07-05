@@ -1,5 +1,5 @@
 from flask import jsonify
-from app.models import cereal
+from app.models import Cereal
 
 def index():
     return '<h1>Hola mundo con flask abellllll</h1>'
@@ -7,7 +7,7 @@ def index():
 
 def get_all_cereal():
  
-    cereal = cereal.get_all()
+    cereal = Cereal.get_all()
 
     return  jsonify(cereal)
 

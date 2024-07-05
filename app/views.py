@@ -7,7 +7,7 @@ def index():
 
 def get_all_cereal():
  
-    cereal = cereal.get_all
+    cereal = cereal.get_all()
 
     return  jsonify(cereal)
 

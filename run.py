@@ -1,9 +1,12 @@
 from flask import Flask
 from app.views import *
+from app.database import init_app
 
 #inicialización del proyecto flask
 
 app= Flask(__name__)
+
+init_app(app)
 
 app.route('/',methods=['GET'])(index)
 app.route('/api/cereal',methods=['GET'])(get_all_cereal)

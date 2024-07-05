@@ -1,7 +1,8 @@
-import os
+import os #maneja funciones realionadas al sistema operativo
 import mysql.connector
-from flask import g
-from dotenv import load_dotenv
+from flask import g  #variable global que permite guardar cierta información que necesite desde el momento que un cliente hace una petición hasta que la petición sea respondida
+#en este caso guarda la conexión que hace con la base de datos
+from dotenv import load_dotenv #para poder cargar el archivo .env 
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()

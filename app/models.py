@@ -10,6 +10,15 @@ class Cereal:
         self.due_date=due_date
         self.banner=banner
  
+    def serialize(self):
+        return {
+            'id_cereal': self.id_cereal,
+            'nombre': self.nombre,
+            'fabricante': self.fabricante,
+            'due_date': self.due_date,   #.strftime('%Y-%m-%d'),
+            'banner': self.banner
+        }
+
     @staticmethod
     def get_all():
 
@@ -18,9 +27,16 @@ class Cereal:
         query = "SELECT * FROM cereal"
         cursor.execute(query)
         rows = cursor.fetchall() #me permite obtener todos los resultados que fueron ejecutados por la query, devuelve una lista de tuplas
-        cursor.close()
         
-        return rows
+        cereal = [ Cereal(id_cereal=row[0], nombre=row[1], fabricante=row[2], due_date=row[3], banner=row[4])
+                  for row in rows]
+        
+        cursor.close()
+
+        return cereal
+
+
+
 
     def get_by_id(id_cereal):
         pass

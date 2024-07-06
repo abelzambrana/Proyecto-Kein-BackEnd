@@ -8,8 +8,8 @@ def index():
 def get_all_cereal():
  
     cereal = Cereal.get_all()
-
-    return  jsonify(cereal)
+    list_cereal = [cer.serialize() for cer in cereal ]
+    return  jsonify(list_cereal)
 
 """   cereal = [
                {

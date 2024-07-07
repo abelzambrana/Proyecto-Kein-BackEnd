@@ -2,7 +2,7 @@ from flask import jsonify, request
 from app.models import Cereal
 
 def index():
-    return '<h1>Hola mundo con flask abellllll</h1>'
+    return '<h1>Hola mundo con flask</h1>'
 
 
 def get_all_cereal():

@@ -9,8 +9,8 @@ app= Flask(__name__)
 init_app(app)
 
 app.route('/',methods=['GET'])(index)
-app.route('/api/cereal',methods=['GET'])(get_all_cereal)
-
+app.route('/api/cereal/',methods=['GET'])(get_all_cereal)
+app.route('/api/cereal/',methods=['POST'])(create_cereal)
 
 if  __name__=='__main__':
     app.run(debug=True)

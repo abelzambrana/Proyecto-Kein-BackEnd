@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from app.models import Cereal
 
 def index():
@@ -34,7 +34,18 @@ def get_cereal():
     pass
 
 def create_cereal():
-    pass
+    #recepcionando los datos enviados en la petición en formato json y los convierte en un diccionario
+    data = request.json
+    new_cereal = Cereal(
+        nombre=data['nombre'],
+        fabricante=data['fabricante'], 
+        due_date=data['due_date'],
+        banner=data['banner']   
+    )
+    new_cereal.save()
+    return jsonify({'message':'Producto creado con exito'}), 201    #se envia un codigo 201 por que es el cod de resp a htpp cdo se indica que un registro a sido creado
+
+
 
 def update_cereal():
     pass

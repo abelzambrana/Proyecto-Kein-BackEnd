@@ -41,8 +41,27 @@ class Cereal:
     def get_by_id(id_cereal):
         pass
 
-    def save():
-        pass
+
+
+    """
+    Insertar un registro si no existe el atributo id_movie
+    """
+    def save(self):
+        db = get_db()
+        cursor = db.cursor()
+        if self.id_cereal:
+            cursor.execute("""
+                UPDATE cereal SET nombre = %s, fabricante = %s, due_date = %s, banner = %s
+                WHERE id_cereal = %s
+            """, (self.nombre, self.fabricante, self.due_date, self.banner, self.id_cereal))
+        else:
+            cursor.execute("""
+                INSERT INTO cereal (nombre, fabricante, due_date, banner) VALUES (%s, %s, %s, %s)
+            """, (self.nombre, self.fabricante, self.due_date, self.banner))
+            self.id_cereal = cursor.lastrowid
+        db.commit()
+        cursor.close()
+
 
     def delete():
         pass

@@ -47,8 +47,17 @@ def create_cereal():
 
 
 
-def update_cereal():
-    pass
+def update_cereal(cereal_id):
+    cereal = Cereal.get_by_id(cereal_id)
+    if not cereal:
+        return jsonify({'message': 'Producto not found'}), 404
+    data = request.json
+    cereal.nombre = data['nombre']
+    cereal.fabricante = data['fabricante']
+    cereal.due_date = data['due_date']
+    cereal.banner = data['banner']
+    cereal.save()
+    return jsonify({'message': 'Producto updated successfully'})    
 
 def delete_cereal():
     pass

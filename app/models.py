@@ -37,9 +37,17 @@ class Cereal:
 
 
 
-
-    def get_by_id(id_cereal):
-        pass
+    @staticmethod
+    def get_by_id(cereal_id):
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM cereal WHERE id_cereal = %s", (cereal_id,))
+        row = cursor.fetchone()
+        cursor.close()
+        if row:
+            return Cereal(id_cereal=row[0], nombre=row[1], fabricante=row[2], due_date=row[3], banner=row[4])
+        return None
+       
 
 
 

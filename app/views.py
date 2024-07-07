@@ -2,7 +2,7 @@ from flask import jsonify, request
 from app.models import Cereal
 
 def index():
-    return '<h1>Hola mundo con flask</h1>'
+    return '<h1>Hola mundo con flask 🐍</h1>'
 
 
 def get_all_cereal():
@@ -30,8 +30,6 @@ def get_all_cereal():
     return  jsonify(cereal)  """
 
 
-def get_cereal():
-    pass
 
 def create_cereal():
     #recepcionando los datos enviados en la petición en formato json y los convierte en un diccionario
@@ -59,5 +57,18 @@ def update_cereal(cereal_id):
     cereal.save()
     return jsonify({'message': 'Producto updated successfully'})    
 
-def delete_cereal():
-    pass
+
+
+def get_cereal(cereal_id):
+    cereal = Cereal.get_by_id(cereal_id)
+    if not cereal:
+        return jsonify({'message': 'Producto not found'}), 404
+    return jsonify(cereal.serialize())
+
+
+def delete_cereal(cereal_id):
+    cereal = Cereal.get_by_id(cereal_id)
+    if not cereal:
+        return jsonify({'message': 'Producto not found'}), 404
+    cereal.delete()
+    return jsonify({'message': 'Producto deleted successfully'})

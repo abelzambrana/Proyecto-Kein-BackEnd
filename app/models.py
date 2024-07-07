@@ -71,5 +71,10 @@ class Cereal:
         cursor.close()
 
 
-    def delete():
-        pass
+    def delete(self):
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("DELETE FROM cereal WHERE id_movie = %s", (self.id_cereal,))
+        db.commit()
+        cursor.close()
+

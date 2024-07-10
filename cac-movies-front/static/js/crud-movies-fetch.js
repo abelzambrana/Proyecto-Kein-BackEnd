@@ -84,7 +84,7 @@ async function saveCereal(){
  * por medio del uso de template string de JS.
  */
 async function showCereals(){
-  let cereals =  await fetchData(BASEURL+'/api/cereals/', 'GET');
+  let cereals =  await fetchData(BASEURL+'/api/cereal/', 'GET');
   const tableCereals = document.querySelector('#list-table-cereals tbody');
   tableCereals.innerHTML='';
   cereals.forEach((cereal,index) => {

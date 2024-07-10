@@ -68,36 +68,36 @@
         <section id="form" class="container ">
             <h2 class="search-title">Gestión de productos</h2>
             <p class="description" >En esta sección se podra llevar a cabo la gestión de los productos</p>
-            <form action="#"  id="form-movie">
+            <form action="#"  id="form-cereal">
                 <div class="d-flex">
                     <div class="form-control d-flex-column">
                         <label for="title">Nombre</label>
-                        <input type="text" class="input-search" name="title" id="title">
+                        <input type="text" class="input-search" name="nombre" id="nombre">
                     </div>
                     <div class="form-control d-flex-column">
-                        <label for="director">Fabricante</label>
-                        <input type="text" class="input-search" name="director" id="director">
+                        <label for="fabricante">Fabricante</label>
+                        <input type="text" class="input-search" name="fabricante" id="fabricante">
                     </div>
                     <!--<div class="form-control d-flex-column">
                         <label for="rating">Rating</label>
                         <input type="number" class="input-search" name="rating" id="rating">
                     </div>-->
                     <div class="form-control d-flex-column">
-                        <label for="release-date">Fecha Vencimiento</label>
-                        <input type="date" class="input-search" name="release_date" id="release-date">
+                        <label for="due-date">Fecha Vencimiento</label>
+                        <input type="date" class="input-search" name="due_date" id="due-date">
                     </div>
                     <div class="form-control d-flex-column">
                         <label for="banner">Banner</label>
                         <input type="url" class="input-search" name="banner" id="banner-form">
                     </div>                
-                    <input type="hidden"  name="id" id="id-movie">
-                    <button class="btn-cac" type="button" id="btn-save-movie">Agregar</button>
+                    <input type="hidden"  name="id" id="id-cereal">
+                    <button class="btn-cac" type="button" id="btn-save-cereal">Agregar</button>
                 </div>
             </form> 
         </section>
         <section id="list" class="container">
             <h3 class="subtitle">Listado de productos</h3>
-            <table id="list-table-movies" class="table">
+            <table id="list-table-cereals" class="table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -108,7 +108,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tbody-table-movies">
+                <tbody id="tbody-table-cereals">
                     
                 </tbody>
             </table>

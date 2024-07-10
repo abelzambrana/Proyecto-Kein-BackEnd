@@ -98,7 +98,7 @@ function saveCereal(){
                 inputDueDate.value,
                 inputBanner.value,
             );
-            cereals.push(newCereal);
+            movies.push(newMovie);
         }
 
         //Se actualiza el array de peliculas en el localstorage

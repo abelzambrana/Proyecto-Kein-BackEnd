@@ -31,24 +31,24 @@ async function fetchData(url, method, data = null) {
  * Funcion que permite crear un elemento <tr> para la tabla de peliculas
  * por medio del uso de template string de JS.
  */
-async function showMovies(){
-    let movies =  await fetchData(BASEURL+'/api/movies/', 'GET');
-    const tableMovies = document.querySelector('#list-table-movies tbody');
-    tableMovies.innerHTML='';
-    movies.forEach((movie, index) => {
+async function showCereals(){
+    let cereals =  await fetchData(BASEURL+'/api/cereal/', 'GET');
+    const tableCereals = document.querySelector('#list-table-cereals tbody');
+    tableCereals.innerHTML='';
+    cereals.forEach((cereal, index) => {
       let tr = `<tr>
-                    <td>${movie.title}</td>
-                    <td>${movie.director}</td>
-                    <td>${movie.release_date}</td>
+                    <td>${cereal.nombre}</td>
+                    <td>${cereal.fabricante}</td>
+                    <td>${cereal.due_date}</td>
                     <td>
-                        <img src="${movie.banner}" width="30%">
+                        <img src="${cereal.banner}" width="30%">
                     </td>
                     <td>
-                        <button class="btn-cac" onclick='updateMovie(${movie.id_movie})'><i class="fa fa-pencil" ></button></i>
-                        <button class="btn-cac" onclick='deleteMovie(${movie.id_movie})'><i class="fa fa-trash" ></button></i>
+                        <button class="btn-cac" onclick='updateCereal(${cereal.id_cereal})'><i class="fa fa-pencil" ></button></i>
+                        <button class="btn-cac" onclick='deleteCereal(${cereal.id_cereal})'><i class="fa fa-trash" ></button></i>
                     </td>
                   </tr>`;
-      tableMovies.insertAdjacentHTML("beforeend",tr);
+      tableCereals.insertAdjacentHTML("beforeend",tr);
     });
   }
 
@@ -57,14 +57,14 @@ async function showMovies(){
  * un registro de pelicula
  * @returns 
  */
-async function saveMovie(){
-    const idMovie = document.querySelector('#id-movie').value;
-    const title = document.querySelector('#title').value;
-    const director = document.querySelector('#director').value;
-    const releaseDate = document.querySelector('#release-date').value;
+async function saveCereal(){
+    const idCereal = document.querySelector('#id-cereal').value;
+    const nombre = document.querySelector('#nombre').value;
+    const fabricante = document.querySelector('#fabricante').value;
+    const dueDate = document.querySelector('#due-date').value;
     const banner = document.querySelector('#banner-form').value;
     //VALIDACION DE FORMULARIO
-    if (!title || !director || !releaseDate || !banner) {
+    if (!nombre || !fabricante || !dueDate || !banner) {
       Swal.fire({
           title: 'Error!',
           text: 'Por favor completa todos los campos.',
@@ -74,30 +74,30 @@ async function saveMovie(){
       return;
     }
     // Crea un objeto con los datos de la película
-    const movieData = {
-        title: title,
-        director: director,
-        release_date: releaseDate,
+    const cerealData = {
+        nombre: nombre,
+        fabricante: fabricante,
+        due_date: dueDate,
         banner: banner,
     };
   let result = null;
   // Si hay un idMovie, realiza una petición PUT para actualizar la película existente
-  if(idMovie!==""){
-    result = await fetchData(`${BASEURL}/api/movies/${idMovie}`, 'PUT', movieData);
+  if(idCereal!==""){
+    result = await fetchData(`${BASEURL}/api/cereal/${idCereal}`, 'PUT', cerealData);
   }else{
     // Si no hay idMovie, realiza una petición POST para crear una nueva película
-    result = await fetchData(`${BASEURL}/api/movies/`, 'POST', movieData);
+    result = await fetchData(`${BASEURL}/api/cereal/`, 'POST', cerealData);
   }
   
-  const formMovie = document.querySelector('#form-movie');
-  formMovie.reset();
+  const formCereal = document.querySelector('#form-cereal');
+  formCereal.reset();
   Swal.fire({
     title: 'Exito!',
     text: result.message,
     icon: 'success',
     confirmButtonText: 'Cerrar'
   })
-  showMovies();
+  showCereals();
 }
   
 /**
@@ -105,15 +105,15 @@ async function saveMovie(){
  * de acuedo al indice del mismo
  * @param {number} id posición del array que se va a eliminar
  */
-function deleteMovie(id){
+function deleteCereal(id){
     Swal.fire({
-        title: "Esta seguro de eliminar la pelicula?",
+        title: "Esta seguro de eliminar este producto?",
         showCancelButton: true,
         confirmButtonText: "Eliminar",
     }).then(async (result) => {
         if (result.isConfirmed) {
-          let response = await fetchData(`${BASEURL}/api/movies/${id}`, 'DELETE');
-          showMovies();
+          let response = await fetchData(`${BASEURL}/api/cereal/${id}`, 'DELETE');
+          showCereals();
           Swal.fire(response.message, "", "success");
         }
     });
@@ -125,28 +125,28 @@ function deleteMovie(id){
  * para su edición
  * @param {number} id Id de la pelicula que se quiere editar
  */
-async function updateMovie(id){
+async function updateCereal(id){
     //Buscamos en el servidor la pelicula de acuerdo al id
-    let response = await fetchData(`${BASEURL}/api/movies/${id}`, 'GET');
-    const idMovie = document.querySelector('#id-movie');
-    const title = document.querySelector('#title');
-    const director = document.querySelector('#director');
-    const releaseDate = document.querySelector('#release-date');
+    let response = await fetchData(`${BASEURL}/api/cereal/${id}`, 'GET');
+    const idCereal = document.querySelector('#id-cereal');
+    const nombre = document.querySelector('#nombre');
+    const fabricante = document.querySelector('#fabricante');
+    const dueDate = document.querySelector('#due-date');
     const banner = document.querySelector('#banner-form');
     
-    idMovie.value = response.id_movie;
-    title.value = response.title;
-    director.value = response.director;
-    releaseDate.value = response.release_date;
+    idCereal.value = response.id_cereal;
+    nombre.value = response.nombre;
+    fabricante.value = response.fabricante;
+    dueDate.value = response.due_date;
     banner.value = response.banner;
 }
   
 // Escuchar el evento 'DOMContentLoaded' que se dispara cuando el 
 // contenido del DOM ha sido completamente cargado y parseado.
 document.addEventListener('DOMContentLoaded',function(){
-    const btnSaveMovie = document.querySelector('#btn-save-movie');
+    const btnSaveMovie = document.querySelector('#btn-save-cereal');
     //ASOCIAR UNA FUNCION AL EVENTO CLICK DEL BOTON
-    btnSaveMovie.addEventListener('click',saveMovie);
-    showMovies();
+    btnSaveCereal.addEventListener('click',saveCereal);
+    showCereals();
 });
   

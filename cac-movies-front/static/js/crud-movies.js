@@ -1,11 +1,11 @@
-class Movie{
+class Cereal{
 
-    constructor(id,title,director,rating,releaseDate,banner){
+    constructor(id,nombre,fabricante,rating,dueDate,banner){
         this.id=id;
-        this.title=title;
-        this.director=director;
+        this.nombre=nombre;
+        this.fabricante=fabricante;
         this.rating=rating;
-        this.releaseDate=releaseDate;
+        this.dueDate=dueDate;
         this.banner=banner
     }
 
@@ -23,34 +23,34 @@ class Movie{
 
 // console.log(movies);
 
-function showMovies(){
+function showCereals(){
     
     //BUSCAR LO QUE HAY EN LOCAL STORAGE
-    let movies = JSON.parse(localStorage.getItem('movies')) || [];
+    let cereals = JSON.parse(localStorage.getItem('cereals')) || [];
 
     //buscar elemento HTML donde quiero insertar las peliculas
-    const tbodyMovies = document.querySelector('#list-table-movies tbody');
+    const tbodyCereals = document.querySelector('#list-table-cereals tbody');
     // const tbodyMovies = document.getElementById('#tbody-table-movies');
     //limpio el contenido de la tabla
-    tbodyMovies.innerHTML = '';
-    movies.forEach(movie => {
+    tbodyCereals.innerHTML = '';
+    cereals.forEach(cereal => {
         //TEMPLATE STRING - TEMPLATE LITERAL 
         const tr = `
                     <tr>
-                        <td>${movie.title}</td>
-                        <td>${movie.director}</td>
-                        <td>${movie.rating}</td>
-                        <td>${movie.releaseDate}</td>
+                        <td>${cereal.nombre}</td>
+                        <td>${cereal.fabricante}</td>
+                        <td>${cereal.rating}</td>
+                        <td>${cereal.dueDate}</td>
                         <td>
-                            <img src="${movie.banner}" alt="${movie.title}" width="30%">
+                            <img src="${cereal.banner}" alt="${cereal.nombre}" width="30%">
                         </td>
                         <td>
-                            <button class="btn-cac" onclick='updateMovie(${movie.id})'><i class="fa fa-pencil" ></button></i>
-                            <button class="btn-cac" onclick='deleteMovie(${movie.id})'><i class="fa fa-trash" ></button></i>
+                            <button class="btn-cac" onclick='updateCereal(${cereal.id})'><i class="fa fa-pencil" ></button></i>
+                            <button class="btn-cac" onclick='deleteCereal(${cereal.id})'><i class="fa fa-trash" ></button></i>
                         </td>
                     </tr>
         `;
-        tbodyMovies.insertAdjacentHTML('beforeend',tr);
+        tbodyCereals.insertAdjacentHTML('beforeend',tr);
     });
 
 }
@@ -59,51 +59,51 @@ function showMovies(){
  * funcion que permite agregar o modificar una pelicula al listado de peliculas
  * almacenado en el localstorage
  */
-function saveMovie(){
+function saveCereal(){
     
     //Obtengo el elemento HTML del formulario
-    const form = document.querySelector('#form-movie');
+    const form = document.querySelector('#form-cereal');
 
     //obtengo los inputs del formulario
-    const inputId = document.querySelector('#id-movie');
-    const inputTitle = document.querySelector('#title');
-    const inputDirector = document.querySelector('#director');
+    const inputId = document.querySelector('#id-cereal');
+    const inputNombre = document.querySelector('#nombre');
+    const inputFabricante = document.querySelector('#fabricante');
     const inputRating = document.querySelector('#rating');
-    const inputReleaseDate = document.querySelector('#release-date');
+    const inputDueDate = document.querySelector('#due-date');
     const inputBanner = document.querySelector('#banner-form');
 
     //Realizo una validación simple de acuerdo al contenido del value del input del titulo
-    if(inputTitle.value.trim() !== ''){
+    if(inputNombre.value.trim() !== ''){
         //Busca en localstorage el item movies, si no existe asigna el array vacio.
-        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        let cereals = JSON.parse(localStorage.getItem('cereals')) || [];
 
         //Si el input de ID es distinto de vacio, es porque se trata de una acción de UPDATE
         if(inputId.value!==""){
             //Busco dentro del arraya de movies el objeto a editar
-            const movieFind = movies.find(movie => movie.id == inputId.value);
+            const cerealFind = cereals.find(cereal => cereal.id == inputId.value);
             //Si existe actualizo el objeto
-            if (movieFind) {
-              movieFind.title = inputTitle.value;
-              movieFind.director = inputDirector.value;
-              movieFind.rating = inputRating.value;
-              movieFind.releaseDate = inputReleaseDate.value;
-              movieFind.banner = inputBanner.value;
+            if (cerealFind) {
+              cerealFind.nombre = inputTitle.value;
+              cerealFind.fabricante = inputDirector.value;
+              cerealFind.rating = inputRating.value;
+              cerealFind.dueDate = inputDueDate.value;
+              cerealFind.banner = inputBanner.value;
             }
         }else{
-            let newMovie = new Movie(
-                movies.length+1,
-                inputTitle.value,
-                inputDirector.value,
+            let newCereal = new Cereal(
+                cereals.length+1,
+                inputNombre.value,
+                inputFabricante.value,
                 inputRating.value,
-                inputReleaseDate.value,
+                inputDueDate.value,
                 inputBanner.value,
             );
-            movies.push(newMovie);
+            cereals.push(newCereal);
         }
 
         //Se actualiza el array de peliculas en el localstorage
-        localStorage.setItem('movies',JSON.stringify(movies));
-        showMovies();
+        localStorage.setItem('cereals',JSON.stringify(cereals));
+        showCereals();
         //Se limpian los inputs del formulario
         form.reset();
         Swal.fire({
@@ -126,45 +126,45 @@ function saveMovie(){
 /**
  * Function que permite cargar el formulario para editar una pelicula
  * de acuedo al id de la pelicula
- * @param {number} movieId id movie que se va a actualizar
+ * @param {number} cerealId id movie que se va a actualizar
  */
-function updateMovie(movieId){
-    let movies = JSON.parse(localStorage.getItem('movies'));
+function updateCereal(cerealId){
+    let cereals = JSON.parse(localStorage.getItem('cereals'));
     //se utiliza el metodo find para poder asegurarnos que exista una pelicula con el id que queremos eliminar.
-    let movieToUpdate = movies.find(movie => movie.id===movieId);
-    if(movieToUpdate){
+    let cerealToUpdate = cereals.find(cereal => cereal.id===cerealId);
+    if(cerealToUpdate){
         //Se buscan los elementos HTML del input
-        const inputId = document.querySelector('#id-movie');
-        const inputTitle = document.querySelector('#title');
-        const inputDirector = document.querySelector('#director');
+        const inputId = document.querySelector('#id-cereal');
+        const inputNombre = document.querySelector('#nombre');
+        const inputFabricante = document.querySelector('#fabricante');
         const inputRating = document.querySelector('#rating');
-        const inputReleaseDate = document.querySelector('#release-date');
+        const inputDueDate = document.querySelector('#due-date');
         const inputBanner = document.querySelector('#banner-form');
         //Se cargan los inputs con los valores de la pelicula encontrada
-        inputId.value = movieToUpdate.id;
-        inputTitle.value = movieToUpdate.title;
-        inputDirector.value = movieToUpdate.director;
-        inputRating.value = movieToUpdate.rating;
-        inputReleaseDate.value = movieToUpdate.releaseDate;
-        inputBanner.value = movieToUpdate.banner;
+        inputId.value = cerealToUpdate.id;
+        inputNombre.value = cerealToUpdate.nombre;
+        inputFabricante.value = cerealToUpdate.fabricante;
+        inputRating.value = cerealToUpdate.rating;
+        inputDueDate.value = cerealToUpdate.dueDate;
+        inputBanner.value = cerealToUpdate.banner;
     }
 }
 
 /**
  * Function que permite eliminar una pelicula del array del localstorage
  * de acuedo al indice del mismo
- * @param {number} movieId id movie que se va a eliminar
+ * @param {number} cerealId id movie que se va a eliminar
  */
-function deleteMovie(movieId){
-    let movies = JSON.parse(localStorage.getItem('movies'));
+function deleteCereal(cerealId){
+    let cereals = JSON.parse(localStorage.getItem('cereals'));
     //se utiliza el metodo find para poder asegurarnos que exista una pelicula con el id que queremos eliminar.
-    let movieToDelete = movies.find(movie => movie.id===movieId);
-    if(movieToDelete){
+    let cerealToDelete = cereals.find(cereal => cereal.id===cerealId);
+    if(cerealToDelete){
         //se utiliza el metodo filter para actualizar el array de movies, sin tener el elemento encontrado en cuestion.
-        movies = movies.filter(movie => movie.id !== movieToDelete.id);
+        cereals = cereals.filter(cereal => cereal.id !== cerealToDelete.id);
         //se actualiza el localstorage
-        localStorage.setItem('movies',JSON.stringify(movies));
-        showMovies();
+        localStorage.setItem('cereals',JSON.stringify(cereals));
+        showCereals();
         Swal.fire({
             title: 'Exito!',
             text: 'La pelicula fue eliminada.',
@@ -177,9 +177,9 @@ function deleteMovie(movieId){
 // NOS ASEGURAMOS QUE SE CARGUE EL CONTENIDO DE LA PAGINA EN EL DOM
 document.addEventListener('DOMContentLoaded',function(){
 
-    const btnSaveMovie = document.querySelector('#btn-save-movie');
+    const btnSaveCereal = document.querySelector('#btn-save-cereal');
 
     //ASOCIAR UNA FUNCION AL EVENTO CLICK DEL BOTON
-    btnSaveMovie.addEventListener('click',saveMovie);
-    showMovies();
+    btnSaveCereal.addEventListener('click',saveCereal);
+    showCereals();
 });

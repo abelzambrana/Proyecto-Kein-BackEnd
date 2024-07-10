@@ -38,22 +38,22 @@ const options = {
     }
 }
 
-const fetchMoviesPromesa  = () => {
+const fetchCerealsPromesa  = () => {
     //COLOCAR LOGICA DE ESPERA
     fetch('https://api.themoviedb.org/3/movie/popular',options)
     .then(response => response.json()) // CONVERTIR A FORMATO JSON LA RESPUESTA DEL SERVIDOR
     .then(responseTransform => {
         console.log(responseTransform);  
-        let movies = responseTransform.results;
+        let cereals = responseTransform.results;
         const divPopular = document.querySelector('#popular-list');
-        movies.forEach(movie => {
+        cereals.forEach(cereal => {
             const html = `
-                    <div class="movie-item">
-                        <a href="./templates/detail-movie.html" >
-                            <img  class="movie-item-img" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-                            <div class="movie-item-detail">
-                                <p class="movie-item-detail-title">${movie.title}</p>
-                                <p class="movie-item-detail-subtitle">${movie.release_date} - ${movie.vote_average}</p>
+                    <div class="cereal-item">
+                        <a href="./templates/detail-cereal.html" >
+                            <img  class="cereal-item-img" src="https://image.tmdb.org/t/p/w500/${cereal.poster_path}" alt="${cereal.title}">
+                            <div class="cereal-item-detail">
+                                <p class="cereal-item-detail-title">${cereal.title}</p>
+                                <p class="cereal-item-detail-subtitle">${cereal.release_date} - ${cereal.vote_average}</p>
                             </div>
                         </a>
                     </div>
@@ -65,7 +65,7 @@ const fetchMoviesPromesa  = () => {
     .catch(error => console.error(error));
 }
 
-const fetchMoviesAyncAwait = async () => {
+const fetchCerealsAyncAwait = async () => {
     try {
         // Hace una solicitud HTTP GET a la URL del servidor seguida de '/movie/popular'. La palabra clave await pausa la ejecución hasta que la promesa devuelta por fetch se resuelva. La variable 'response' contendrá la respuesta HTTP.
         const response =  await fetch(`https://api.themoviedb.org/3/movie/popular/movie/popular`, 
@@ -74,18 +74,18 @@ const fetchMoviesAyncAwait = async () => {
         console.log('Esperando resolución');
         // Utiliza la palabra clave await para pausar la ejecución hasta que la promesa devuelta por response.json() se resuelva. La variable 'data' contendrá el cuerpo de la respuesta JSON.
         const data = await response.json();
-        const movies = data.results;
+        const cereals = data.results;
         console.log(data);
 
         const divPopular = document.querySelector('#popular-list');
-        movies.forEach(movie => {
+        cereals.forEach(cereal => {
             const html = `
-                    <div class="movie-item">
-                        <a href="./templates/detail-movie.html" >
-                            <img  class="movie-item-img" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-                            <div class="movie-item-detail">
-                                <p class="movie-item-detail-title">${movie.title}</p>
-                                <p class="movie-item-detail-subtitle">${movie.release_date} - ${movie.vote_average}</p>
+                    <div class="cereal-item">
+                        <a href="./templates/detail-cereal.html" >
+                            <img  class="cereal-item-img" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+                            <div class="cereal-item-detail">
+                                <p class="cereal-item-detail-title">${cereal.nombre}</p>
+                                <p class="cereal-item-detail-subtitle">${cereal.due_date} - ${cereal.vote_average}</p>
                             </div>
                         </a>
                     </div>
@@ -99,4 +99,4 @@ const fetchMoviesAyncAwait = async () => {
     
 }
 
-fetchMoviesPromesa();
+fetchCerealsPromesa();

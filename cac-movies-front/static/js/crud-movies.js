@@ -167,7 +167,7 @@ function deleteCereal(cerealId){
         showCereals();
         Swal.fire({
             title: 'Exito!',
-            text: 'La pelicula fue eliminada.',
+            text: 'El producto fue eliminado.',
             icon: 'success',
             confirmButtonText: 'Cerrar'
         })

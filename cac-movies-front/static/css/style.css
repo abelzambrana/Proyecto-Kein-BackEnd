@@ -13,11 +13,20 @@ third: var(--third-color)
 } */
 
 :root{
-    --bg-color:#181419;
-    --primary-color:#9f3647;
+    --bg-color:#646e72f5;
+
+    /*--primary-color:#9f3647;   68a568   ffae00   4cbbee*/
+    --primary-color:#68a568;
+
+    /*--secondary-color:#ffc098;*/
     --secondary-color:#ffc098;
-    --third-color:#db4648;
+    
+    /*--third-color:#db4648;*/
+    --third-color:#e96d07;
+
+    /*--third-bis-color:#db4648f2;*/
     --third-bis-color:#db4648f2;
+
     --bg-input-color:#4f31572c;
 }
 
